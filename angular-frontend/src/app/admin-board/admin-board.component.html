@@ -1,0 +1,50 @@
+<div class="container">
+    <header class="jumbotron">
+        <h1>Admin Board</h1>
+        <p>admin-board works!</p>
+    </header>
+    <div class="list row">
+        <!--Search bar-->
+        <div class="col-md-8">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by username" [(ngModel)]="username" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="searchUsername()">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--List of Users-->
+        <div class="col-md-6">
+            <h4>Users List</h4>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let user of users; let i = index" [class.active]="i == currentIndex"
+                    (click)="setActiveUser(user, i)">
+                    {{ user.username }}
+                </li>
+            </ul>
+        </div>
+        <!--Current/selected user column-->
+        <div class="col-md-6">
+            <div *ngIf="currentUser">
+                <h4>User Details</h4>
+                <div>
+                    <label><strong>Username:</strong></label> {{ currentUser.username }}
+                </div>
+                <div>
+                    <label><strong>Email:</strong></label>
+                    {{ currentUser.email }}
+                </div>
+                <a class="badge badge-warning" routerLink="/users/{{ currentUser.id }}">
+                    Edit
+                </a>
+            </div>
+
+            <div *ngIf="!currentUser">
+                <br />
+                <p>Please select a user...</p>
+            </div>
+        </div>
+    </div>
+</div>
